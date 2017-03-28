@@ -14,13 +14,31 @@ naquele determinado momento*/
 	private double tempoLocacao;//Meses
 	private double medida;//por M^2
 	private String observacao;
+	
+	public Conjunto()
+	{
+		setStatus(false);
+		setValor(0.0);
+		setTempoLocacao(0.0);
+		setMedida(0.0);
+		setObservacao(null);
+	}
+	public Conjunto(int id,boolean status,double valor,double tempoLocacao,double medida,String obseracao)
+	{
+		setIdConjunto(id);
+		setStatus(status);
+		setValor(valor);
+		setTempoLocacao(tempoLocacao);
+		setMedida(medida);
+		setObservacao(obseracao);		
+	}
 	public int getIdConjunto() {
 		return idConjunto;
 	}
 	public void setIdConjunto(int idConjunto) {
 		this.idConjunto = idConjunto;
 	}
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 	public void setStatus(boolean status) {

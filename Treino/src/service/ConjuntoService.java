@@ -27,4 +27,9 @@ public class ConjuntoService
 	{
 		return dao.carregar(id);
 	}
+	
+	public int retornaUltimoId(Conjunto conjunto)
+	{
+		return dao.retornaUltimoId(conjunto);
+	}
 }

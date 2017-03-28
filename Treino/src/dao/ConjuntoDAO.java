@@ -10,11 +10,11 @@ import model.Conjunto;
 public class ConjuntoDAO {
 	public void criar(Conjunto conjunto)
 	{
-		String sqlInsert = "INSERT INTO conjuto(statusOcupado,valor,tempoLocacao,medida,observacao) values (?,?,?,?,?);";
+		String sqlInsert = "INSERT INTO Conjunto(statusOcupado,valor,tempoLocacao,medida,observacao) values (?,?,?,?,?)";
 		// usando o try with resources do Java 7, que fecha o que abriu
 		try (Connection conn = ConnectionFactory.obtemConexao();
 				PreparedStatement stm = conn.prepareStatement(sqlInsert);) {
-			stm.setBoolean(1, conjunto.isStatus());
+			stm.setBoolean(1, conjunto.getStatus());
 			stm.setDouble(2, conjunto.getValor());
 			stm.setDouble(3, conjunto.getTempoLocacao());
 			stm.setDouble(4, conjunto.getMedida());
@@ -26,11 +26,11 @@ public class ConjuntoDAO {
 	}
 	
 	public void atualizar(Conjunto conjunto) {
-		String sqlUpdate = "UPDATE conjunto SET statusOcupado=?, valor=?, tempoLocacao=?, medida=?,observacao=? WHERE idConjunto=?";
+		String sqlUpdate = "UPDATE Conjunto SET statusOcupado=?, valor=?, tempoLocacao=?, medida=?,observacao=? WHERE idConjunto=?";
 		// usando o try with resources do Java 7, que fecha o que abriu
 		try (Connection conn = ConnectionFactory.obtemConexao();
 				PreparedStatement stm = conn.prepareStatement(sqlUpdate);) {
-			stm.setBoolean(1, conjunto.isStatus());
+			stm.setBoolean(1, conjunto.getStatus());
 			stm.setDouble(2, conjunto.getValor());
 			stm.setDouble(3, conjunto.getTempoLocacao());
 			stm.setDouble(4, conjunto.getMedida());
@@ -84,5 +84,20 @@ public class ConjuntoDAO {
 			System.out.print(e1.getStackTrace());
 		}
 		return conjunto;
+	}
+	public int retornaUltimoId(Conjunto conjunto)
+	{
+		// usando o try with resources do Java 7, que fecha o que abriu
+		String sqlQuery = "SELECT MAX(idConjunto) FROM Conjunto;";
+		try (Connection conn = ConnectionFactory.obtemConexao();
+			PreparedStatement stm2 = conn.prepareStatement(sqlQuery);
+					ResultSet rs = stm2.executeQuery();) {
+				if (rs.next()) {
+					conjunto.setIdConjunto(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return conjunto.getIdConjunto();
 	}
 }
