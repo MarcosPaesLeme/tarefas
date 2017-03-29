@@ -68,65 +68,35 @@ public class ManterConjuntoController extends HttpServlet {
 	
 		Conjunto conjunto = new Conjunto(id, status2, valor, tempoLocacao,medida,observacao);
 		ConjuntoService service = new ConjuntoService();
-		PrintWriter out = response.getWriter();
+		
 		
 		String oQueFazer = request.getParameter("oQueFazer");
 		switch (oQueFazer) {
 		case "Cadastrar":
-			out.println("<html> "
-					+ "<body> <header> <h1>Cadastro realizado com sucesso</h1> </header> "
-					+"<p> Dados do cojnunto:"+conjunto.getMedida()+"/"+conjunto.getStatus()+"/"+conjunto.getObservacao()+"/"+conjunto.getTempoLocacao()+"</p>"+ "</body> </html>");
+			int ultimoID = 0;
 			service.criar(conjunto);
-			out.println("<html> "
-					+ "<body> <header> <h1>Cadastro realizado com sucesso</h1> </header> "
-					+ "<p>O cliente com o ID <b>" + service.retornaUltimoId(conjunto) + "</b> foi cadastrado com sucesso</p>"
-					+ "<form action="+ "http://localhost:8080/Treino/index.html" +">"
-					+ "<input type="+"submit"+" value="+"Voltar"+" />"
-					+ "</body> </html>");			
-			out.close();
-			//request.setAttribute("Mensagem", "Cliente cadastrado com sucesso!");
+			ultimoID = service.retornaUltimoId(conjunto); 
+			request.setAttribute("resultado", "Conjunto cadastrado com sucesso. O registro dele é:"+ultimoID);
 			break;
 		case "Consultar":
 			conjunto = service.carregar(conjunto.getIdConjunto());
-			out.println("<html> "
-					+ "<body> <header> <h1>Cadastro realizado com sucesso</h1> </header> "
-					+ "<p>O ID do conjunto é: <b>" + conjunto.getIdConjunto() + "</b></p>"
-					+ "<p>O status é: <b>" + conjunto.getStatus() + "</b></p>"
-					+ "<p>O valor do conjunto é: <b>" + conjunto.getValor() + "</b></p>"
-					+ "<p>O tempo de locação do cojunto é: <b>" + conjunto.getTempoLocacao() + "</b></p>"
-					+ "<p>A medida do conjunto é: <b>" + conjunto.getMedida() + "</b></p>"
-					+ "<p>Observações do conjunto: <b>" + conjunto.getObservacao() + "</b></p>"			
-					+ "<form action="+ "http://localhost:8080/Treino/index.html" +">"
-					+ "<input type="+"submit"+" value="+"Voltar"+" />"
-					+ "</body> </html>");
-			out.close();
-			//request.setAttribute("Mensagem", "Cliente consultado com sucesso!");
+			request.setAttribute("resultado", "Conjunto consultado com sucesso"+"ID:"+conjunto.getIdConjunto()+"Status"+conjunto.getStatus()+"Valor"+conjunto.getValor()+"Tempo alocacao:"+conjunto.getTempoLocacao()+"Medida"+conjunto.getMedida()+"Observações"+conjunto.getObservacao());
 			break;
 		case "Remover":
 			service.excluir(conjunto.getIdConjunto());
-			out.println("<html> "
-					+ "<body> <header> <h1>Exclusão realizado com sucesso</h1> </header> "
-					+"<p> Dados do conjunto excluido</p>"+ "<form action="+ "http://localhost:8080/Treino/index.html" +">"
-					+ "<input type="+"submit"+" value="+"Voltar"+" />"+ "</body> </html>");
-			out.close();
-			//request.setAttribute("Mensagem", "Cliente deletado com sucesso!");
+			request.setAttribute("resultado", "Conjunto excluido!!!");
 			break;
 		case "Atualizar":
 			service.atualizar(conjunto);
-			out.println("<html> "
-					+ "<body> <header> <h1>Atualização realizado com sucesso</h1> </header> "
-					+"<p> Dados do conjunto atualizada</p>"+ "<form action="+ "http://localhost:8080/Treino/index.html" +">"
-					+ "<input type="+"submit"+" value="+"Voltar"+" />"+ "</body> </html>");
-			out.close();
-			//request.setAttribute("Mensagem", "Cliente atualizado com sucesso!");
+			request.setAttribute("resultado", "Conjunto atulizado com sucesso");
 			break;
 		}
 
-		//request.setAttribute("conjunto", conjunto);
-		//request.setAttribute("oQueFazer", oQueFazer);
-
-		//RequestDispatcher dispatch = request.getRequestDispatcher("Cliente.jsp");
-		//dispatch.forward(request, res
+		request.setAttribute("conjunto", conjunto);
+		request.setAttribute("oQueFazer", oQueFazer);
+		
+		RequestDispatcher dispatch = request.getRequestDispatcher("Conjunto.jsp");
+		dispatch.forward(request, response);
 	}
 }
 
