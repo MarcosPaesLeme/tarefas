@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Refatoração do Conjunto</title>
+</head>
+<body>
+<form action="ManterConjuntoController.do" method="get" >
+
+<label>ID: </label><br/>
+<input type="text" placeholder="ID" id="idConjunto" name="idConjunto"/><br /> <br />
+<label>Status</label><br/>
+<input type="radio" name="status" value="Disponivel"/><label>Disponivel</label>
+<input type="radio" name="status" value="Indisponivel"/><label>Indisponivel</label><br/><br/>
+<label>Valor:</label><br/>
+<input type="number" step=0.5 placeholder="Valor" id="valor_conjunto" name="valorConjunto"/><br /> <br />
+<label>Tempo de locacao: </label><br/>
+<input type="number" placeholder="TempoLocacao" id="tempoLocacao_conjunto" name="tempoLocacaoConjunto"/><br /> <br />
+<label>Medida</label>
+<input type="number" step=0.5 placeholder="Medida" id="medida_conjunto" name="medidaConjunto"/><br /> <br />
+<label>Observação: </label>
+<input type="text" placeholder="Observacao" id="observacao_conjunto" name="observacaoConjunto"/><br /> <br />
+
+<input type="submit" name="oQueFazer"value="Cadastrar"/><br/>
+<input type="submit" name="oQueFazer"value="Consultar"/><br/>
+<input type="submit" name="oQueFazer" value="Remover"/><br/>
+<input type="submit" name="oQueFazer" value="Atualizar"/>
+</form>
+</body>
+</html>
