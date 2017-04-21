@@ -11,11 +11,9 @@ public class ConnectionFactory {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	// Obt√©m conex√£o com o banco de dados
-	public static Connection obtemConexao() throws SQLException {
-		return DriverManager
-				.getConnection("jdbc:mysql://localhost/system?user=root&password=nat039012");
-	}
 
+	// ObtÈm conex„o com o banco de dados
+	public static Connection obtemConexao() throws SQLException {
+		return DriverManager.getConnection("jdbc:mysql://localhost/SistemaPredial?user=root&password=rafaela");
+	}
 }

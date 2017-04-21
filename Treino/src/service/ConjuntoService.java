@@ -1,35 +1,62 @@
 package service;
 
 import dao.ConjuntoDAO;
-
 import model.Conjunto;
 
-public class ConjuntoService 
-{
-	ConjuntoDAO dao = new ConjuntoDAO();
+public class ConjuntoService {
+	ConjuntoDAO dao;
 	
-	public void criar(Conjunto conjunto)
+	public ConjuntoService()
 	{
-		dao.criar(conjunto);
+		dao = new ConjuntoDAO();
 	}
 	
-	public void atualizar(Conjunto conjunto)
+	public void verificaOcupacao(Conjunto to)
 	{
-		dao.atualizar(conjunto);
+		dao.ocupado(to);
 	}
 	
-	public void excluir(int id)
+	public void qtdAndares()
 	{
-		dao.excluir(id);
+		dao.andares();
 	}
 	
-	public Conjunto carregar(int id)
+	public void excluirEmpresaDoConjunto(Conjunto to)
 	{
-		return dao.carregar(id);
+		dao.excluiConj(to);
 	}
 	
-	public int retornaUltimoId(Conjunto conjunto)
+	public void nomeEmpresaDoCOnjunto(Conjunto to)
 	{
-		return dao.retornaUltimoId(conjunto);
+		dao.nomeEmpresa(to);
 	}
+	
+	public void inserirEmpresa(Conjunto to, String cnpj)
+	{
+		dao.inserirEmpresa(to, cnpj);
+	}
+	
+	public void conjuntosDaEmpresa(Conjunto to, String cnpj)
+	{
+		dao.conjEmpresa(cnpj);
+	}
+	
+	public void criarConjunto(Conjunto to)
+	{
+		dao.cadastrarConjunto(to);
+	}
+	
+	public Conjunto consultarConjunto(int id)
+	{
+		return dao.consultarConjunto(id);	
+	}
+	
+	public void alterarConjunto(Conjunto to){
+		dao.alterarConjunto(to);
+	}
+	
+	public void excluirConjunto(Conjunto to){
+		dao.excluirConjunto(to);
+	}
+
 }
