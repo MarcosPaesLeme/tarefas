@@ -51,4 +51,19 @@ public class UsuarioDAO {
 		}
 		return false;
 	}
+	
+	public boolean cadastraUsuario(Usuario to)
+	{
+		String sqlInsert = "insert into Login (usuario,senha) values (?,?); ";
+		try (Connection conn = ConnectionFactory.obtemConexao();
+				PreparedStatement stm = conn.prepareStatement(sqlInsert);) {
+			stm.setString(1, to.getUsername());
+			stm.setString(2, to.getPassword());
+			stm.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

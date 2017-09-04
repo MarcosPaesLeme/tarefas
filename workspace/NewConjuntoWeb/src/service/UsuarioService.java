@@ -20,4 +20,9 @@ public class UsuarioService {
 	{
 		return dao.validarUsuario(to);
 	}
+	
+	public boolean cadastrarUsuario(Usuario to)
+	{
+		return dao.cadastraUsuario(to);
+	}
 }
